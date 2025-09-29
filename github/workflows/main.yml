@@ -1,0 +1,46 @@
+name: Deploy website
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+    branches:
+      - 'main'
+    
+jobs:
+  build_publish_images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout
+        run: |
+          docker login --username daraghd --password ${{ secrets.GCR_TOKEN }} ghcr.io
+          cd frontend
+          find . -type f -exec sed -i 's|http://localhost:8080|http://meowketplace.ie:8080|g' {} +
+          docker build . --tag ghcr.io/daraghd/meowketplace_frontend:latest
+          docker push ghcr.io/daraghd/meowketplace_frontend:latest
+          cd ../backend
+          find . -type f -exec sed -i 's|http://localhost:5173|http://meowketplace.ie|g' {} +
+          docker build . --tag ghcr.io/daraghd/meowketplace_backend:latest
+          docker push ghcr.io/daraghd/meowketplace_backend:latest
+
+  rebuild_backend_frontend:
+    runs-on: ubuntu-latest
+    needs: build_publish_images
+
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd meowketplace
+          git pull
+          docker login --username daraghd --password ${{ secrets.GCR_TOKEN }} ghcr.io
+          docker compose down
+          docker compose up --pull always -d
