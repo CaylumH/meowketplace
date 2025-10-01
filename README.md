@@ -73,6 +73,4 @@ The project was developed using **HTML, CSS, Bootstrap, PHP, and MySQL**.
 
 **Demo GIF**  
 ![Demo GIF](images/meowketplace.gif)
-*Demonstrates search, sorting, and filtering of services, as well as messaging interactions.*  
-
----
+*Demonstrates search, sorting, and filtering of services, as well as messaging interactions.*
