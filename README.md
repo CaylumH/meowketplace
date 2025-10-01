@@ -72,7 +72,7 @@ The project was developed using **HTML, CSS, Bootstrap, PHP, and MySQL**.
 ![Admin Page](images/meowketplace-admin-screenshot.png)  
 
 **Demo GIF**  
-![Demo GIF](https://imgur.com/gallery/meowketplace-gif-Gp3lBNP)
+![Demo GIF](https://i.imgur.com/yiA7548.gif)
 *Demonstrates search, sorting, and filtering of services, as well as messaging interactions.*  
 
 ---
