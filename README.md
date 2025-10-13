@@ -2,7 +2,7 @@
 
 **Meowketplace** is a **business service marketplace** focused on pet-related services. Businesses can advertise their offerings, and users can connect, negotiate, and arrange services through the platform.  
 
-The project was developed using **HTML, CSS, Bootstrap, PHP, and MySQL**.  
+The group project was developed using **HTML, CSS, Bootstrap, PHP, and MySQL**.  
 
 ---
 
